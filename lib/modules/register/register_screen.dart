@@ -69,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Register now to browse our hot offers',
+                        'Register now to communicate with friends',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: Colors.grey
                         ),

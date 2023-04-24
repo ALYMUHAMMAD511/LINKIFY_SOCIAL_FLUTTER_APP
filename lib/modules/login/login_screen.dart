@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Login now to browse our hot offers',
+                        'Login now to communicate with friends',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: Colors.grey
                         ),
