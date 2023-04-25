@@ -21,7 +21,17 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => LoginCubit(),
       child: BlocConsumer <LoginCubit, LoginStates>(
-        listener: (context, state) {},
+        listener: (context, state)
+        {
+          if (state is LoginErrorState)
+            {
+              Toast.show(state.error, backgroundColor: Colors.red, gravity: Toast.bottom);
+            }
+          if (state is LoginSuccessState)
+          {
+            Toast.show('Login Done Successfully', backgroundColor: Colors.green, gravity: Toast.bottom);
+          }
+        },
         builder:(context, state) => Scaffold(
           appBar: AppBar(),
           body: Center(
@@ -72,13 +82,13 @@ class LoginScreen extends StatelessWidget {
                         suffixIcon: LoginCubit.get(context).suffix,
                         onFieldSubmitted: (value)
                         {
-                          // if (formKey.currentState!.validate())
-                          // {
-                          //   LoginCubit.get(context).userLogin(
-                          //     email: emailController.text,
-                          //     password: passwordController.text,
-                          //   );
-                          // }
+                          if (formKey.currentState!.validate())
+                          {
+                            LoginCubit.get(context).userLogin(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
+                          }
                         },
                         isPassword: LoginCubit.get(context).isPasswordShown,
                         suffixPressed: ()
@@ -102,15 +112,14 @@ class LoginScreen extends StatelessWidget {
                       ConditionalBuilder(
                         condition: state is! LoginLoadingState,
                         builder: (context) => defaultButton(
-                          onPressed: ()
-                          {
-                            // if (formKey.currentState!.validate())
-                            // {
-                            //   LoginCubit.get(context).userLogin(
-                            //       email: emailController.text,
-                            //       password: passwordController.text
-                            //   );
-                            },
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              LoginCubit.get(context).userLogin(
+                                  email: emailController.text,
+                                  password: passwordController.text
+                              );
+                            }
+                          },
                           text: 'login',
                           isUpperCase: true,
                         ),
@@ -119,20 +128,23 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 17.0,
                       ),
-                      Row(
-                        children:
-                        [
-                          const Text(
-                            'Don\'t have an Account?',
-                          ),
-                          defaultTextButton(
-                            onPressed: ()
-                            {
-                              navigateTo(context, RegisterScreen());
-                            },
-                            text: 'register',
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 65.0),
+                        child: Row(
+                          children:
+                          [
+                            const Text(
+                              'Don\'t have an Account?',
+                            ),
+                            defaultTextButton(
+                              onPressed: ()
+                              {
+                                navigateTo(context, RegisterScreen());
+                              },
+                              text: 'register',
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

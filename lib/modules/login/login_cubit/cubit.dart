@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/modules/login/login_cubit/states.dart';
@@ -7,31 +9,29 @@ class LoginCubit extends Cubit <LoginStates> {
   LoginCubit() : super(LoginInitialState());
 
   static LoginCubit get(context) => BlocProvider.of(context);
-  // late LoginModel loginModel;
-  //
-  // void userLogin({
-  //   required String email,
-  //   required String password,
-  // }) {
-  //   emit(LoginLoadingState());
-  //   DioHelper.postData(
-  //       url: LOGIN,
-  //       data: {
-  //         'email': email,
-  //         'password': password,
-  //       }).then((value) {
-  //     if (kDebugMode) {
-  //       print(value.data);
-  //       loginModel = LoginModel.fromJson(value.data);
-  //       emit(LoginSuccessState(loginModel));
-  //     }
-  //   }).catchError((error) {
-  //     if (kDebugMode) {
-  //       print(error.toString());
-  //     }
-  //     emit(LoginErrorState(error));
-  //   });
-  // }
+
+  void userLogin({
+    required String email,
+    required String password,
+  }) {
+    emit(LoginLoadingState());
+
+    FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+    ).then((value)
+    {
+      if (kDebugMode)
+      {
+        print(value.user!.email);
+        print(value.user!.uid);
+      }
+      emit(LoginSuccessState());
+    }).catchError((error)
+    {
+      emit(LoginErrorState(error.toString()));
+    });
+  }
 
   IconData suffix = Icons.visibility_outlined;
   bool isPasswordShown = true;
