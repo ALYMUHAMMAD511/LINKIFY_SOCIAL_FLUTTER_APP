@@ -69,7 +69,6 @@ class SocialLayout extends StatelessWidget {
             );
           },
           fallback: (context) => const Center(child: CircularProgressIndicator()),
-
         ),
       ),
     );
