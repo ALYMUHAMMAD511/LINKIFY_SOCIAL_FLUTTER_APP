@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/cubit/cubit.dart';
@@ -26,7 +27,11 @@ class SocialLayout extends StatelessWidget {
           condition: SocialCubit.get(context).userModel != null,
           builder: (context)
           {
-            var model = SocialCubit.get(context).userModel;
+            var model = FirebaseAuth.instance.currentUser!.emailVerified;
+            if (kDebugMode)
+            {
+              print(model);
+            }
             return Column(
               children:
               [
