@@ -36,7 +36,6 @@ class RegisterCubit extends Cubit <RegisterStates> {
         print(value.user!.email);
         print(value.user!.uid);
       }
-      emit(RegisterSuccessState());
     }).catchError((error)
     {
       emit(RegisterErrorState(error.toString()));
@@ -54,6 +53,7 @@ class RegisterCubit extends Cubit <RegisterStates> {
       email: email,
       phone: phone,
       uId: uId,
+      isEmailVerified: false,
     );
     FirebaseFirestore.instance
         .collection('users')

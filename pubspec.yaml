@@ -41,6 +41,7 @@ dependencies:
   smooth_page_indicator: ^1.0.1
   toast: ^0.3.0
   hexcolor: ^3.0.1
+  shared_preferences: ^2.0.15
   firebase_core: ^2.10.0
   firebase_auth: ^4.4.2
   cloud_firestore: ^4.5.2

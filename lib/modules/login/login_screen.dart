@@ -6,6 +6,8 @@ import 'package:social_app/modules/login/login_cubit/states.dart';
 import 'package:social_app/modules/register/register_screen.dart';
 import 'package:social_app/shared/components/components.dart';
 import 'package:toast/toast.dart';
+import '../../layout/social_layout.dart';
+import '../../shared/network/local/cache_helper.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
@@ -27,10 +29,15 @@ class LoginScreen extends StatelessWidget {
             {
               Toast.show(state.error, backgroundColor: Colors.red, gravity: Toast.bottom);
             }
-          if (state is LoginSuccessState)
-          {
-            Toast.show('Login Done Successfully', backgroundColor: Colors.green, gravity: Toast.bottom);
-          }
+            if (state is LoginSuccessState)
+            {
+
+                CacheHelper.saveData(key: 'uId', value: state.uId).then((value)
+                {
+                  navigateAndFinish(context, const SocialLayout());
+                });
+                Toast.show('Login Done Successfully', duration: Toast.lengthLong, gravity:  Toast.bottom, backgroundColor: Colors.green);
+              }
         },
         builder:(context, state) => Scaffold(
           appBar: AppBar(),
