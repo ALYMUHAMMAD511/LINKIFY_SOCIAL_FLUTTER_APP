@@ -18,7 +18,8 @@ ThemeData darkTheme = ThemeData(
       titleTextStyle: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontSize: 22.0,
+        fontSize: 24.0,
+        fontFamily: 'jannah',
       ),
       iconTheme: const IconThemeData(
         color: Colors.white,
@@ -56,7 +57,8 @@ ThemeData lightTheme = ThemeData(
     titleTextStyle: TextStyle(
       color: Colors.black,
       fontWeight: FontWeight.bold,
-      fontSize: 22.0,
+      fontSize: 24.0,
+      fontFamily: 'jannah',
     ),
     iconTheme: IconThemeData(
       color: Colors.black,

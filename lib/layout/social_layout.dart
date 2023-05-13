@@ -1,16 +1,12 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/cubit/states.dart';
-import 'package:social_app/shared/components/components.dart';
+import 'package:social_app/shared/styles/icon_broken.dart';
 import 'package:toast/toast.dart';
 
 class SocialLayout extends StatelessWidget {
   const SocialLayout({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context)
@@ -19,58 +15,54 @@ class SocialLayout extends StatelessWidget {
 
     return BlocConsumer <SocialCubit, SocialStates>(
       listener: (context, state) {},
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(
-          title: const Text('News Feed'),
-        ),
-        body: ConditionalBuilder(
-          condition: SocialCubit.get(context).userModel != null,
-          builder: (context)
-          {
-            var model = FirebaseAuth.instance.currentUser!.emailVerified;
-            if (kDebugMode)
-            {
-              print(model);
-            }
-            return Column(
-              children:
-              [
-                if (!FirebaseAuth.instance.currentUser!.emailVerified)
-                  Container(
-                  color: Colors.amber.withOpacity(0.6),
-                  height: 50.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.info_outline),
-                        const SizedBox(width: 15.0,),
-                        const Expanded(
-                            child: Text('Please, Verify your Email')),
-                        const SizedBox(width: 20.0,),
-                        defaultTextButton(
-                          onPressed: ()
-                          {
-                            FirebaseAuth.instance.currentUser!.sendEmailVerification().then((value)
-                            {
-                              Toast.show('Check your Mail', backgroundColor: Colors.green, gravity: Toast.bottom);
-                            }).catchError((error)
-                            {
+      builder: (context, state)
+      {
+        var cubit = SocialCubit.get(context);
 
-                            });
-                          },
-                          text: 'Send',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-          fallback: (context) => const Center(child: CircularProgressIndicator()),
-        ),
-      ),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(cubit.titles[cubit.currentIndex]),
+            actions:
+            [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(IconBroken.Notification),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(IconBroken.Search),
+              ),
+            ],
+          ),
+          body: cubit.screens[cubit.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            items:
+            const [
+              BottomNavigationBarItem(
+                icon: Icon(IconBroken.Home),
+                label: 'Home',
+            ),
+              BottomNavigationBarItem(
+                icon: Icon(IconBroken.Chat),
+                label: 'Chats',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(IconBroken.Location),
+                label: 'Users',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(IconBroken.Setting),
+                label: 'Settings',
+              ),
+            ],
+            currentIndex: cubit.currentIndex,
+            onTap: (index)
+            {
+              cubit.changeBottomNav(index);
+            },
+          ),
+        );
+      }
     );
   }
 }
