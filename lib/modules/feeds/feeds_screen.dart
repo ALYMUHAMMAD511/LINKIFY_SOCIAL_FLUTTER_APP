@@ -14,18 +14,35 @@ class FeedsScreen extends StatelessWidget {
             elevation: 10.0,
             margin: const EdgeInsets.all(8.0),
             child: Stack(
+              alignment: AlignmentDirectional.bottomEnd,
               children :
-              const [
-                Image(
-                  image: NetworkImage('https://img.freepik.com/free-photo/social-media-concept-with-smartphone_52683-100042.jpg?w=900&t=st=1683993733~exp=1683994333~hmac=06f38627a284122de3ae8554f36b3aa024f04ef79dc22342f6ebad642fe31179'),
+              [
+                const Image(
+                  image: NetworkImage('https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg'),
                   fit: BoxFit.cover,
                   height: 200.0,
                   width: double.infinity,
                 ),
-                Text('Communicate with Friends'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Communicate with Friends',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
+                  ),
+                ),
               ],
             ),
           ),
+        Card(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          elevation: 10.0,
+          child:Column(
+            children:
+            [
+
+            ],
+          )
+        ),
       ],
     );
   }

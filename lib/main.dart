@@ -18,7 +18,8 @@ Future <void> main() async
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
-
+  bool defaultMode = false;
+  late bool? isDark =  CacheHelper.getBoolean(key: 'isDark');
   late Widget widget;
   uId = CacheHelper.getData(key: 'uId');
   if (kDebugMode)
@@ -35,19 +36,22 @@ Future <void> main() async
       widget = LoginScreen();
     }
 
-  runApp(MyApp(startWidget : widget));
+  runApp(MyApp(
+    isDark: isDark ?? defaultMode,
+    startWidget : widget,));
 }
 
 class MyApp extends StatelessWidget {
   final Widget startWidget;
-  const MyApp({super.key, required this.startWidget});
+  final bool isDark;
+  const MyApp({super.key, required this.startWidget, required this.isDark});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SocialCubit()..getUserData(),
+          create: (context) => SocialCubit()..getUserData()..changeThemeMode(fromShared: isDark),
         ),
       ],
       child: BlocConsumer<SocialCubit, SocialStates>(
@@ -55,6 +59,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => MaterialApp(
           theme: lightTheme,
           darkTheme: darkTheme,
+          themeMode: SocialCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
           debugShowCheckedModeBanner: false,
           home: startWidget,
         ),

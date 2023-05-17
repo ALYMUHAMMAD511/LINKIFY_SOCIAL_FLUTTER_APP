@@ -6,8 +6,9 @@ class UsersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context)
   {
-    return const Text(
-      'Users',
+    return Text(
+        'Users',
+        style: Theme.of(context).textTheme.titleMedium!
     );
   }
 }

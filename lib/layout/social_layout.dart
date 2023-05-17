@@ -32,6 +32,12 @@ class SocialLayout extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(IconBroken.Search),
               ),
+              IconButton(
+                  onPressed: ()
+                  {
+                    SocialCubit.get(context).changeThemeMode();
+                  },
+                  icon: const Icon(Icons.brightness_4_outlined)),
             ],
           ),
           body: cubit.screens[cubit.currentIndex],

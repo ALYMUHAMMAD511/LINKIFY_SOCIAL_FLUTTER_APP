@@ -8,7 +8,6 @@ ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: HexColor('333739'),
     appBarTheme: AppBarTheme(
       titleSpacing: 20.0,
-      backwardsCompatibility: false,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: HexColor('333739'),
         statusBarIconBrightness: Brightness.light,
@@ -34,12 +33,23 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: HexColor('333739'),
     ),
     textTheme: const TextTheme(
-      bodyText1 : TextStyle(
+      titleLarge : TextStyle(
+        fontSize: 25.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+      titleMedium : TextStyle(
         fontSize: 18.0,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
+      titleSmall: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
     ),
+
     fontFamily: 'Jannah'
 );
 ThemeData lightTheme = ThemeData(
@@ -47,7 +57,6 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: const AppBarTheme(
     titleSpacing: 20.0,
-    backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.white,
       statusBarIconBrightness: Brightness.dark,
@@ -70,11 +79,21 @@ ThemeData lightTheme = ThemeData(
     elevation: 20.0,
   ),
   textTheme: const TextTheme(
-    bodyText1: TextStyle(
-      fontSize: 18.0,
-      fontWeight: FontWeight.bold,
-      color: Colors.black,
-    ),
-  ),
+titleLarge : TextStyle(
+fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+),
+    titleMedium : TextStyle(
+fontSize: 18.0,
+fontWeight: FontWeight.bold,
+color: Colors.black,
+),
+titleSmall: TextStyle(
+fontSize: 16.0,
+fontWeight: FontWeight.bold,
+color: Colors.black,
+),
+),
   fontFamily: 'jannah',
 );

@@ -10,29 +10,25 @@ import 'package:social_app/modules/settings/settings_screen.dart';
 import 'package:social_app/modules/users/users_screen.dart';
 import 'package:social_app/shared/components/constants.dart';
 
-class SocialCubit extends Cubit <SocialStates>
-{
+import '../shared/network/local/cache_helper.dart';
+
+class SocialCubit extends Cubit <SocialStates> {
   SocialCubit() : super(SocialInitialState());
 
   static SocialCubit get(context) => BlocProvider.of(context);
 
   UserModel? userModel;
 
-  void getUserData()
-  {
+  void getUserData() {
     emit(SocialGetUserLoadingState());
-    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value)
-    {
-      if (kDebugMode)
-      {
+    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+      if (kDebugMode) {
         print(value.data());
       }
       userModel = UserModel.fromJson(value.data()!);
       emit(SocialGetUserSuccessState());
-    }).catchError((error)
-    {
-      if (kDebugMode)
-      {
+    }).catchError((error) {
+      if (kDebugMode) {
         print(error.toString());
       }
       emit(SocialGetUserErrorState(error.toString()));
@@ -57,9 +53,25 @@ class SocialCubit extends Cubit <SocialStates>
     'Settings',
   ];
 
-  void changeBottomNav(int index)
-  {
+  void changeBottomNav(int index) {
     currentIndex = index;
     emit(SocialChangeBottomNavState());
+  }
+
+  late bool isDark = false;
+
+  void changeThemeMode({bool? fromShared}) {
+    if (fromShared != null)
+    {
+      isDark = fromShared;
+      emit(AppChangeThemeModeState());
+    }
+    else
+    {
+      isDark = !isDark;
+      CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+        emit(AppChangeThemeModeState());
+      });
+    }
   }
 }
