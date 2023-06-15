@@ -77,7 +77,8 @@ class SocialCubit extends Cubit <SocialStates> {
     else
     {
       isDark = !isDark;
-      CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+      CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value)
+      {
         emit(AppChangeThemeModeState());
       });
     }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/shared/styles/colors.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 
@@ -105,6 +107,7 @@ void printFullText(String text)
 }
 
 Widget buildPostItem(context) => Card(
+    color: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5.0,
     margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -129,17 +132,19 @@ Widget buildPostItem(context) => Card(
                   children:
                   [
                     Row(
-                      children: const [
+                      children:
+                      [
                         Text(
                           'ALy Muhammad',
                           style: TextStyle(
+                            color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
                             height: 1.4,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5.0,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.check_circle,
                           color: defaultColor,
                           size: 16.0,
@@ -148,7 +153,10 @@ Widget buildPostItem(context) => Card(
                     ),
                     Text(
                       'June 15, 2023 at 11:00 PM',
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(height: 1.4),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        height: 1.4,
+                        color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
+                      ),
                     ),
                   ],
                 ),
@@ -158,9 +166,10 @@ Widget buildPostItem(context) => Card(
               ),
               IconButton(
                 onPressed: (){},
-                icon: const Icon(
+                icon: Icon(
                   Icons.more_horiz,
                   size: 16.0,
+                  color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
                 ),
               ),
             ],
@@ -261,7 +270,9 @@ Widget buildPostItem(context) => Card(
                               ),
                               Text(
                                 '1200',
-                                style: Theme.of(context).textTheme.bodySmall,
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                  color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
+                                ),
                               ),
                             ],
                           ),
@@ -292,7 +303,9 @@ Widget buildPostItem(context) => Card(
                               ),
                               Text(
                                 '120 Comments',
-                                style: Theme.of(context).textTheme.bodySmall,
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                  color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
+                                ),
                               ),
                             ],
                           ),
@@ -329,7 +342,9 @@ Widget buildPostItem(context) => Card(
                       ),
                       Text(
                         'Write a comment ...',
-                        style: Theme.of(context).textTheme.bodySmall,
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
+                          ),
                       ),
                     ],
                   ),
@@ -356,7 +371,9 @@ Widget buildPostItem(context) => Card(
                           ),
                           Text(
                             'Like',
-                            style: Theme.of(context).textTheme.bodySmall,
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
+                              ),
                           ),
                         ],
                       ),
