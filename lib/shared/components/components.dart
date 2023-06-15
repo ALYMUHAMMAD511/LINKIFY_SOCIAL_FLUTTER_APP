@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/shared/styles/colors.dart';
+import 'package:social_app/shared/styles/icon_broken.dart';
 
 Widget mySeparator() => Padding(
   padding: const EdgeInsetsDirectional.only(start: 20.0),
@@ -9,7 +10,6 @@ Widget mySeparator() => Padding(
     color: Colors.grey[300],
   ),
 );
-
 
 Widget defaultFormField({
   required TextEditingController? controller,
@@ -103,3 +103,270 @@ void printFullText(String text)
   final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
+
+Widget buildPostItem(context) => Card(
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    elevation: 5.0,
+    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+    child:Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        children:
+        [
+          Row(
+            children:
+            [
+              const CircleAvatar(
+                radius: 25.0,
+                backgroundImage: NetworkImage('https://img.freepik.com/free-photo/carefree-joyful-handsome-afro-american-man-with-bushy-hairstyle_273609-14083.jpg?w=900&t=st=1686838506~exp=1686839106~hmac=3a52c2d1354134fd0073268b8229b31410a859167153663f4cfd02c85b8f47b5'),
+              ),
+              const SizedBox(
+                width: 15.0,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:
+                  [
+                    Row(
+                      children: const [
+                        Text(
+                          'ALy Muhammad',
+                          style: TextStyle(
+                            height: 1.4,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        Icon(
+                          Icons.check_circle,
+                          color: defaultColor,
+                          size: 16.0,
+                        ),
+                      ],
+                    ),
+                    Text(
+                      'June 15, 2023 at 11:00 PM',
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(height: 1.4),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                width: 15.0,
+              ),
+              IconButton(
+                onPressed: (){},
+                icon: const Icon(
+                  Icons.more_horiz,
+                  size: 16.0,
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            child: Container(
+              width: double.infinity,
+              height: 1.0,
+              color: Colors.grey[300],
+            ),
+          ),
+          Text(
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+              bottom: 10.0,
+              top: 5.0,
+            ),
+            child: Container(
+              width: double.infinity,
+              child: Wrap(
+                children:
+                [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(end: 7.0),
+                    child: Container(
+                      height: 25.0,
+                      child: MaterialButton(
+                        minWidth: 1.0,
+                        padding: EdgeInsets.zero,
+                        onPressed: (){},
+                        child: Text(
+                          '#software',
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: defaultColor
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(end: 7.0),
+                    child: Container(
+                      height: 25.0,
+                      child: MaterialButton(
+                        minWidth: 1.0,
+                        padding: EdgeInsets.zero,
+                        onPressed: (){},
+                        child: Text(
+                          '#flutter',
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: defaultColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            height: 140.0,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.0),
+              image: const DecorationImage(
+                image: NetworkImage('https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Row(
+                        children:
+                        [
+                          Row(
+                            children:
+                            [
+                              const Icon(
+                                IconBroken.Heart,
+                                size: 17.0,
+                                color: Colors.red,
+                              ),
+                              const SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                '1200',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children:
+                        [
+                          Row(
+                            children:
+                            [
+                              const Icon(
+                                IconBroken.Chat,
+                                size: 17.0,
+                                color: Colors.amber,
+                              ),
+                              const SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                '120 Comments',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(bottom: 10.0),
+            child: Container(
+              width: double.infinity,
+              height: 1.0,
+              color: Colors.grey[300],
+            ),
+          ),
+          Row(
+            children:
+            [
+              Expanded(
+                child: InkWell(
+                  child: Row(
+                    children:
+                    [
+                      const CircleAvatar(
+                        radius: 18.0,
+                        backgroundImage: NetworkImage('https://img.freepik.com/free-photo/carefree-joyful-handsome-afro-american-man-with-bushy-hairstyle_273609-14083.jpg?w=900&t=st=1686838506~exp=1686839106~hmac=3a52c2d1354134fd0073268b8229b31410a859167153663f4cfd02c85b8f47b5'),
+                      ),
+                      const SizedBox(
+                        width: 15.0,
+                      ),
+                      Text(
+                        'Write a comment ...',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  onTap: (){},
+                ),
+              ),
+              InkWell(
+                onTap: (){},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: Row(
+                    children:
+                    [
+                      Row(
+                        children:
+                        [
+                          const Icon(
+                            IconBroken.Heart,
+                            size: 17.0,
+                            color: Colors.red,
+                          ),
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(
+                            'Like',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    )
+);

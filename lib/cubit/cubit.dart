@@ -53,9 +53,17 @@ class SocialCubit extends Cubit <SocialStates> {
     'Settings',
   ];
 
-  void changeBottomNav(int index) {
-    currentIndex = index;
-    emit(SocialChangeBottomNavState());
+  void changeBottomNav(int index)
+  {
+    if (index == 2)
+      {
+        emit(SocialNewPostState());
+      }
+    else
+      {
+        currentIndex = index;
+        emit(SocialChangeBottomNavState());
+      }
   }
 
   late bool isDark = false;
