@@ -53,6 +53,9 @@ class RegisterCubit extends Cubit <RegisterStates> {
       email: email,
       phone: phone,
       uId: uId,
+      image: 'https://img.freepik.com/free-photo/carefree-joyful-handsome-afro-american-man-with-bushy-hairstyle_273609-14083.jpg?w=900&t=st=1686838506~exp=1686839106~hmac=3a52c2d1354134fd0073268b8229b31410a859167153663f4cfd02c85b8f47b5',
+      cover: 'https://img.freepik.com/free-photo/carefree-joyful-handsome-afro-american-man-with-bushy-hairstyle_273609-14083.jpg?w=900&t=st=1686838506~exp=1686839106~hmac=3a52c2d1354134fd0073268b8229b31410a859167153663f4cfd02c85b8f47b5',
+      bio: 'Write your Biography ...',
       isEmailVerified: false,
     );
     FirebaseFirestore.instance
@@ -70,8 +73,7 @@ class RegisterCubit extends Cubit <RegisterStates> {
 
   void changePasswordVisibility() {
     isPasswordShown = !isPasswordShown;
-    suffix =
-    isPasswordShown ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    suffix = isPasswordShown ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(ChangeRegisterPasswordVisibilityState());
   }
 }

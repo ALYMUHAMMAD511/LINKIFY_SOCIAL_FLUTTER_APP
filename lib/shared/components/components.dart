@@ -49,7 +49,7 @@ Widget defaultButton({
   bool isUpperCase = true,
 }) => Container(
   width: width,
-  height: 50.0,
+  height: 40.0,
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(radius),
     color: background,

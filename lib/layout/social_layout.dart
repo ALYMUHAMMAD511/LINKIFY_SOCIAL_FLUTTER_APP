@@ -69,8 +69,8 @@ class SocialLayout extends StatelessWidget {
                 label: 'Users',
               ),
               BottomNavigationBarItem(
-                icon: Icon(IconBroken.Setting),
-                label: 'Settings',
+                icon: Icon(IconBroken.Profile),
+                label: 'Profile',
               ),
             ],
             currentIndex: cubit.currentIndex,

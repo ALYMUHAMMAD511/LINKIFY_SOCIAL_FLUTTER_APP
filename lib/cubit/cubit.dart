@@ -6,10 +6,10 @@ import 'package:social_app/cubit/states.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/modules/chats/chats_screen.dart';
 import 'package:social_app/modules/feeds/feeds_screen.dart';
-import 'package:social_app/modules/settings/settings_screen.dart';
+import 'package:social_app/modules/new_post/new_post_screen.dart';
 import 'package:social_app/modules/users/users_screen.dart';
 import 'package:social_app/shared/components/constants.dart';
-
+import '../modules/profile/profile_screen.dart';
 import '../shared/network/local/cache_helper.dart';
 
 class SocialCubit extends Cubit <SocialStates> {
@@ -41,16 +41,18 @@ class SocialCubit extends Cubit <SocialStates> {
   [
     const FeedsScreen(),
     const ChatsScreen(),
+    const NewPostScreen(),
     const UsersScreen(),
-    const SettingsScreen(),
+    const ProfileScreen(),
   ];
 
   List <String> titles =
   [
     'Home',
     'Chats',
+    'Post',
     'Users',
-    'Settings',
+    'Profile',
   ];
 
   void changeBottomNav(int index)
