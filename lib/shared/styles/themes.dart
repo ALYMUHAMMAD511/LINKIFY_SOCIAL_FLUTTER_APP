@@ -33,6 +33,9 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: HexColor('333739'),
     ),
     textTheme: const TextTheme(
+      headlineMedium : TextStyle(
+        color: Colors.white,
+      ),
       titleLarge : TextStyle(
         fontSize: 25.0,
         fontWeight: FontWeight.bold,
@@ -79,11 +82,15 @@ ThemeData lightTheme = ThemeData(
     selectedItemColor: defaultColor,
     elevation: 20.0,
   ),
-  textTheme: const TextTheme(
-titleLarge : TextStyle(
-fontSize: 25.0,
-  fontWeight: FontWeight.bold,
-  color: Colors.black,
+  textTheme:
+  const TextTheme(
+    titleLarge : TextStyle(
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+),
+    headlineMedium : TextStyle(
+      color: Colors.black,
 ),
     titleMedium : TextStyle(
 fontSize: 18.0,

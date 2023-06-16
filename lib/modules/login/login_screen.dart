@@ -1,11 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:social_app/modules/login/login_cubit/cubit.dart';
 import 'package:social_app/modules/login/login_cubit/states.dart';
 import 'package:social_app/modules/register/register_screen.dart';
 import 'package:social_app/shared/components/components.dart';
 import 'package:toast/toast.dart';
+import '../../cubit/cubit.dart';
 import '../../layout/social_layout.dart';
 import '../../shared/network/local/cache_helper.dart';
 
@@ -40,6 +42,7 @@ class LoginScreen extends StatelessWidget {
               }
         },
         builder:(context, state) => Scaffold(
+          backgroundColor: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
           appBar: AppBar(),
           body: Center(
             child: SingleChildScrollView(
@@ -53,20 +56,19 @@ class LoginScreen extends StatelessWidget {
                     [
                       Text(
                         'LOGIN',
-                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          color: Colors.black,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         'Login now to communicate with friends',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.grey
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.grey,
                         ),
                       ),
                       const SizedBox(
                         height: 30.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: emailController,
                         type: TextInputType.emailAddress,
                         validate: (String? value)
@@ -84,6 +86,7 @@ class LoginScreen extends StatelessWidget {
                         height: 17.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: passwordController,
                         type: TextInputType.visiblePassword,
                         suffixIcon: LoginCubit.get(context).suffix,

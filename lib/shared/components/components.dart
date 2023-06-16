@@ -13,7 +13,7 @@ Widget mySeparator() => Padding(
   ),
 );
 
-Widget defaultFormField({
+Widget defaultFormField(context,{
   required TextEditingController? controller,
   TextInputType? type,
   bool isPassword = false,
@@ -25,14 +25,29 @@ Widget defaultFormField({
   VoidCallback? onTap,
   bool isClickable = true,
   ValueChanged<String>? onFieldSubmitted}) => TextFormField(
+  style: TextStyle(
+    color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+  ),
   controller: controller,
   keyboardType: type,
   obscureText: isPassword,
   decoration: InputDecoration(
     labelText: labelText,
-    prefixIcon: Icon(prefixIcon),
-    suffixIcon: IconButton(onPressed: suffixPressed, icon: Icon(suffixIcon)),
-    border: const OutlineInputBorder(),
+    labelStyle: TextStyle(
+      color:SocialCubit.get(context).isDark ? Colors.white: Colors.black,),
+    prefixIcon: Icon(
+      prefixIcon,
+      color: SocialCubit.get(context).isDark ? Colors.white70: Colors.black54,
+    ),
+    suffixIcon: IconButton(onPressed: suffixPressed,
+        icon: Icon(
+          suffixIcon,
+          color: SocialCubit.get(context).isDark ? Colors.white70: Colors.black54,
+        )
+    ),
+    border: OutlineInputBorder(
+      borderSide: BorderSide(color: SocialCubit.get(context).isDark ? Colors.white: Colors.black54,),
+    ),
   ),
   onFieldSubmitted: onFieldSubmitted,
   validator: validate,
