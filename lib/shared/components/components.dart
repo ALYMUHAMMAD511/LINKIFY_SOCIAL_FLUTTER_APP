@@ -402,3 +402,19 @@ Widget buildPostItem(context) => Card(
       ),
     )
 );
+
+PreferredSizeWidget defaultAppBar({
+  required BuildContext context,
+  String? title,
+  List <Widget>? actions,
+}) => AppBar(
+  leading: IconButton(
+    onPressed: ()
+    {
+      Navigator.pop(context);
+    },
+    icon: const Icon(IconBroken.Arrow___Left_2),
+  ),
+  title: Text(title!),
+  actions: actions,
+);

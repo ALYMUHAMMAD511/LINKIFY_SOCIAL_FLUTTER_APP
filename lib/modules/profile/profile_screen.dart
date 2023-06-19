@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/cubit/states.dart';
+import 'package:social_app/modules/edit_profile/edit_profile_screen.dart';
+import 'package:social_app/shared/components/components.dart';
 import 'package:social_app/shared/styles/colors.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 
@@ -175,7 +177,10 @@ class ProfileScreen extends StatelessWidget {
                         color: defaultColor,
                       ),
                       child: MaterialButton(
-                        onPressed: (){},
+                        onPressed: ()
+                        {
+                          navigateTo(context, const EditProfileScreen());
+                        },
                         child: const Icon(
                           IconBroken.Edit,
                           size: 18.0,
