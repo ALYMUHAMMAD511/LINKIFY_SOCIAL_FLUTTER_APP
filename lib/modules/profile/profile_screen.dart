@@ -179,7 +179,7 @@ class ProfileScreen extends StatelessWidget {
                       child: MaterialButton(
                         onPressed: ()
                         {
-                          navigateTo(context, const EditProfileScreen());
+                          navigateTo(context, EditProfileScreen());
                         },
                         child: const Icon(
                           IconBroken.Edit,

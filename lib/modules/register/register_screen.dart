@@ -32,6 +32,7 @@ class RegisterScreen extends StatelessWidget {
           }
         },
         builder: (context, state) => Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
           appBar: AppBar(),
           body: Center(

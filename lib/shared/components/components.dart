@@ -34,7 +34,7 @@ Widget defaultFormField(context,{
   decoration: InputDecoration(
     labelText: labelText,
     labelStyle: TextStyle(
-      color:SocialCubit.get(context).isDark ? Colors.white: Colors.black,),
+      color:SocialCubit.get(context).isDark ? Colors.white70: Colors.black54,),
     prefixIcon: Icon(
       prefixIcon,
       color: SocialCubit.get(context).isDark ? Colors.white70: Colors.black54,
@@ -415,6 +415,7 @@ PreferredSizeWidget defaultAppBar({
     },
     icon: const Icon(IconBroken.Arrow___Left_2),
   ),
+  titleSpacing: 5.0,
   title: Text(title!),
   actions: actions,
 );
