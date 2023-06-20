@@ -76,4 +76,32 @@ class SocialLikePostErrorState extends SocialStates
   SocialLikePostErrorState(this.error);
 }
 
+class SocialCreateCommentLoadingState extends SocialStates {}
+
+class SocialCreateCommentSuccessState extends SocialStates {}
+
+class SocialCreateCommentErrorState extends SocialStates
+{
+  final String error;
+  SocialCreateCommentErrorState(this.error);
+}
+
+class SocialCommentImagePickedSuccessState extends SocialStates {}
+
+class SocialCommentImagePickedErrorState extends SocialStates {}
+
+class SocialUploadCommentImageSuccessState extends SocialStates {}
+
+class SocialUploadCommentImageErrorState extends SocialStates {}
+
+class SocialGetCommentsLoadingState extends SocialStates {}
+
+class SocialGetCommentsSuccessState extends SocialStates {}
+
+class SocialGetCommentsErrorState extends SocialStates
+{
+  final String error;
+  SocialGetCommentsErrorState(this.error);
+}
+
 class AppChangeThemeModeState extends SocialStates {}

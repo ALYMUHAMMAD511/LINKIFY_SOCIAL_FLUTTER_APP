@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:social_app/cubit/cubit.dart';
+import 'package:social_app/models/comments_model.dart';
 import 'package:social_app/models/post_model.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/shared/styles/colors.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
+
+import '../../modules/comments/comments_screen.dart';
+
+PreferredSizeWidget defaultAppBar({
+  required BuildContext context,
+  String? title,
+  List <Widget>? actions,
+}) => AppBar(
+  leading: IconButton(
+    onPressed: ()
+    {
+      Navigator.pop(context);
+    },
+    icon: const Icon(IconBroken.Arrow___Left_2),
+  ),
+  titleSpacing: 5.0,
+  title: Text(title!),
+  actions: actions,
+);
 
 Widget mySeparator() => Padding(
   padding: const EdgeInsetsDirectional.only(start: 20.0),
@@ -121,6 +141,7 @@ String capitalizeAllWord(String value)
 void printFullText(String text)
 {
   final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
+  // ignore: avoid_print
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
 
@@ -212,45 +233,45 @@ Widget buildPostItem(PostModel model, context, index) => Card(
             ),
             child: Container(
               width: double.infinity,
-              child: Wrap(
-                children:
-                [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(end: 7.0),
-                    child: Container(
-                      height: 25.0,
-                      child: MaterialButton(
-                        minWidth: 1.0,
-                        padding: EdgeInsets.zero,
-                        onPressed: (){},
-                        child: Text(
-                          '#software',
-                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                              color: defaultColor
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(end: 7.0),
-                    child: Container(
-                      height: 25.0,
-                      child: MaterialButton(
-                        minWidth: 1.0,
-                        padding: EdgeInsets.zero,
-                        onPressed: (){},
-                        child: Text(
-                          '#flutter',
-                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: defaultColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // child: Wrap(
+              //   children:
+              //   [
+                  // Padding(
+                  //   padding: const EdgeInsetsDirectional.only(end: 7.0),
+                  //   child: Container(
+                  //     height: 25.0,
+                  //     child: MaterialButton(
+                  //       minWidth: 1.0,
+                  //       padding: EdgeInsets.zero,
+                  //       onPressed: (){},
+                  //       child: Text(
+                  //         '#software',
+                  //         style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  //             color: defaultColor
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsetsDirectional.only(end: 7.0),
+                  //   child: Container(
+                  //     height: 25.0,
+                  //     child: MaterialButton(
+                  //       minWidth: 1.0,
+                  //       padding: EdgeInsets.zero,
+                  //       onPressed: (){},
+                  //       child: Text(
+                  //         '#flutter',
+                  //         style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  //           color: defaultColor,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                // ],
+              // ),
             ),
           ),
           if(model.postImage != '')
@@ -325,7 +346,7 @@ Widget buildPostItem(PostModel model, context, index) => Card(
                                 width: 5.0,
                               ),
                               Text(
-                                '0 Comments',
+                                '${SocialCubit.get(context).postsComments[index]}',
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                   color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
                                 ),
@@ -371,7 +392,14 @@ Widget buildPostItem(PostModel model, context, index) => Card(
                       ),
                     ],
                   ),
-                  onTap: (){},
+                  onTap: ()
+                  {
+                    navigateTo(
+                        context,
+                        CommentsScreen(
+                          uIdIndex: SocialCubit.get(context).postsId[index],
+                        ));
+                  },
                 ),
               ),
               InkWell(
@@ -414,6 +442,74 @@ Widget buildPostItem(PostModel model, context, index) => Card(
     )
 );
 
+late final String uIdIndex;
+
+Widget buildCommentItem(context, CommentsModel model) => Column(
+  children:
+  [
+    if (model.postId == uIdIndex)
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:
+        [
+          CircleAvatar(
+            radius: 30.0,
+            backgroundImage: NetworkImage(
+              '${model.image}',
+            ),
+          ),
+          const SizedBox(
+            width: 10.0,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+              [
+                Row(
+                  children:
+                  [
+                    Text(
+                      '${model.name}',
+                      style:
+                      Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                        height: 1.0,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 7.0,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(5.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  child: Text(
+                    '${model.text}',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith
+                      (
+                        height: 1.6,
+                        fontSize: 15.0,
+                        color: Colors.grey[700],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+  ],
+);
+
 Widget buildChatItem(UserModel model ,context) => InkWell(
   onTap: (){},
   child: Padding(
@@ -438,21 +534,4 @@ Widget buildChatItem(UserModel model ,context) => InkWell(
       ],
     ),
   ),
-);
-
-PreferredSizeWidget defaultAppBar({
-  required BuildContext context,
-  String? title,
-  List <Widget>? actions,
-}) => AppBar(
-  leading: IconButton(
-    onPressed: ()
-    {
-      Navigator.pop(context);
-    },
-    icon: const Icon(IconBroken.Arrow___Left_2),
-  ),
-  titleSpacing: 5.0,
-  title: Text(title!),
-  actions: actions,
 );

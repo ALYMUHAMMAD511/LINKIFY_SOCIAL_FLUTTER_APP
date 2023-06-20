@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_app/cubit/states.dart';
+import 'package:social_app/models/comments_model.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/modules/chats/chats_screen.dart';
 import 'package:social_app/modules/feeds/feeds_screen.dart';
@@ -367,26 +368,146 @@ class SocialCubit extends Cubit <SocialStates> {
     });
   }
 
-  List <UserModel> users = [];
-
-  void getAllUsers()
+  File? commentImage;
+  Future<void> getCommentImage() async
   {
-    emit(SocialGetPostsLoadingState());
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if(pickedFile != null)
+    {
+      commentImage = File(pickedFile.path);
+      if (kDebugMode)
+      {
+        print(pickedFile.path);
+      }
+      emit(SocialCommentImagePickedSuccessState());
+    }
+    else
+    {
+      if (kDebugMode)
+      {
+        print('No Image Selected');
+      }
+      emit(SocialCommentImagePickedErrorState());
+    }
+  }
+
+  void uploadCommentImage({
+    required String uId,
+    required String text,
+    String? postId,
+  })
+  {
+    emit(SocialCreatePostLoadingState());
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child("comments/${Uri.file(commentImage!.path).pathSegments.last}")
+        .putFile(commentImage!)
+        .then((value)
+    {
+      value.ref.getDownloadURL().then((value)
+      {
+        createComment(
+          uId: uId,
+          text: text,
+          commentImage: value,
+          postId: postId!,
+        );
+        emit(SocialUploadCommentImageSuccessState());
+      }).catchError((error)
+      {
+        emit(SocialUploadCommentImageErrorState());
+      });
+    }).catchError((error)
+    {
+      emit(SocialUploadCommentImageErrorState());
+    });
+  }
+
+  void createComment({
+    required String uId,
+    required String text,
+    String? commentImage,
+    String? postId,
+  })
+  {
+    emit(SocialCreateCommentLoadingState());
+    CommentsModel commentModel = CommentsModel(
+      name: userModel!.name,
+      text: text,
+      image: userModel!.image,
+      uId: userModel!.uId,
+      commentImage: commentImage,
+      postId: postId,
+    );
     FirebaseFirestore.instance
-        .collection('users')
+        .collection("posts")
+        .doc(uId)
+        .collection("comments")
+        .doc(userModel!.uId)
+        .set(commentModel.toMap())
+        .then((value)
+    {
+      emit(SocialCreateCommentSuccessState());
+    })
+        .catchError((error)
+    {
+      emit(SocialCreateCommentErrorState(error.toString()));
+    });
+  }
+
+  List<CommentsModel> postsComments = [];
+  List<String> postsIdComment = [];
+  List<int> comments = [];
+
+  void getComments()
+  {
+    emit(SocialGetCommentsLoadingState());
+    FirebaseFirestore.instance
+        .collection('posts')
         .get()
         .then((value)
     {
       for (var element in value.docs)
       {
-          users.add(UserModel.fromJson(element.data()));
+        element.reference
+            .collection('comments')
+            .get()
+            .then((value)
+        {
+          comments.add(value.docs.length);
+          postsIdComment.add(element.id);
+          postsComments.add(CommentsModel.fromJson(element.data()));
+        })
+            .catchError((error) {});
       }
-      emit(SocialGetAllUsersSuccessState());
+      emit(SocialGetCommentsSuccessState());
     })
         .catchError((error)
     {
-      emit(SocialGetAllUsersErrorState(error.toString()));
+      emit(SocialGetCommentsErrorState(error.toString()));
     });
+  }
+
+  List <UserModel> users = [];
+
+  void getAllUsers() {
+    emit(SocialGetPostsLoadingState());
+    if (users.isEmpty)
+    {
+      FirebaseFirestore.instance
+          .collection('users')
+          .get()
+          .then((value) {
+        for (var element in value.docs) {
+          users.add(UserModel.fromJson(element.data()));
+        }
+        emit(SocialGetAllUsersSuccessState());
+      })
+          .catchError((error) {
+        emit(SocialGetAllUsersErrorState(error.toString()));
+      });
+    }
   }
 
   late bool isDark = false;
