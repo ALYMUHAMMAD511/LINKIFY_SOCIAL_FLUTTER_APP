@@ -103,7 +103,8 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
     ),
         (Route<dynamic> route) => false);
 
-String capitalizeAllWord(String value) {
+String capitalizeAllWord(String value)
+{
   var result = value[0].toUpperCase();
   for (int i = 1; i < value.length; i++) {
     if (value[i - 1] == " ") {

@@ -11,6 +11,7 @@ import 'package:social_app/modules/feeds/feeds_screen.dart';
 import 'package:social_app/modules/new_post/new_post_screen.dart';
 import 'package:social_app/modules/users/users_screen.dart';
 import 'package:social_app/shared/components/constants.dart';
+import '../models/post_model.dart';
 import '../modules/profile/profile_screen.dart';
 import '../shared/network/local/cache_helper.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -45,7 +46,7 @@ class SocialCubit extends Cubit <SocialStates> {
   [
     const FeedsScreen(),
     const ChatsScreen(),
-    const NewPostScreen(),
+    NewPostScreen(),
     const UsersScreen(),
     const ProfileScreen(),
   ];
@@ -74,6 +75,7 @@ class SocialCubit extends Cubit <SocialStates> {
 
   File? profileImage;
   File? coverImage;
+  File? postImage;
   var picker = ImagePicker();
 
   Future<void> getProfileImage () async
@@ -150,7 +152,7 @@ class SocialCubit extends Cubit <SocialStates> {
     })
         .catchError((error)
     {
-      emit(SocialUploadProfileImageSuccessState());
+      emit(SocialUploadProfileImageErrorState());
     });
   }
 
@@ -186,7 +188,7 @@ class SocialCubit extends Cubit <SocialStates> {
     })
         .catchError((error)
     {
-      emit(SocialUploadCoverImageSuccessState());
+      emit(SocialUploadCoverImageErrorState());
     });
   }
 
@@ -222,9 +224,99 @@ class SocialCubit extends Cubit <SocialStates> {
     });
   }
 
+  Future<void> getPostImage () async
+  {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if(pickedFile != null)
+    {
+      postImage = File(pickedFile.path);
+      emit(SocialPostImagePickedSuccessState());
+    }
+    else
+    {
+      if (kDebugMode)
+      {
+        print('No Image Selected');
+      }
+      emit(SocialPostImagePickedErrorState());
+    }
+  }
+
+  void uploadPostImage({
+    required String text,
+    required String dateTime,
+  })
+  {
+    emit(SocialCreatePostLoadingState());
+
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('posts/${Uri.file(postImage!.path).pathSegments.last}')
+        .putFile(postImage!)
+        .then((value)
+    {
+      value.ref.getDownloadURL().then((value)
+      {
+        if (kDebugMode)
+        {
+          print(value);
+        }
+        createPost(
+          text: text,
+          dateTime: dateTime,
+          postImage: value,
+        );
+      }).catchError((error)
+      {
+        emit(SocialCreatePostErrorState());
+      });
+    })
+        .catchError((error)
+    {
+      emit(SocialCreatePostErrorState());
+    });
+  }
+
+  void removePostImage()
+  {
+    postImage = null;
+    emit(SocialRemovePostImageState());
+  }
+
+  void createPost({
+    required String text,
+    required String dateTime,
+    String? postImage,
+  })
+  {
+    emit(SocialCreatePostLoadingState());
+
+    PostModel model = PostModel(
+      uId: userModel!.uId,
+      name: userModel!.name,
+      image: userModel!.image,
+      text: text,
+      dateTime: dateTime,
+      postImage: postImage ?? '',
+    );
+
+    FirebaseFirestore.instance
+        .collection('posts')
+        .add(model.toMap())
+        .then((value)
+    {
+      emit(SocialCreatePostSuccessState());
+    }).catchError((error)
+    {
+      SocialCreatePostErrorState();
+    });
+  }
+
   late bool isDark = false;
 
-  void changeThemeMode({bool? fromShared}) {
+  void changeThemeMode({bool? fromShared})
+  {
     if (fromShared != null)
     {
       isDark = fromShared;
