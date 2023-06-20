@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:social_app/cubit/cubit.dart';
+import 'package:social_app/models/post_model.dart';
 import 'package:social_app/shared/styles/colors.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 
@@ -122,7 +123,7 @@ void printFullText(String text)
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
 
-Widget buildPostItem(context) => Card(
+Widget buildPostItem(PostModel model, context) => Card(
     color: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5.0,
@@ -130,14 +131,15 @@ Widget buildPostItem(context) => Card(
     child:Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:
         [
           Row(
             children:
             [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 25.0,
-                backgroundImage: NetworkImage('https://img.freepik.com/free-photo/carefree-joyful-handsome-afro-american-man-with-bushy-hairstyle_273609-14083.jpg?w=900&t=st=1686838506~exp=1686839106~hmac=3a52c2d1354134fd0073268b8229b31410a859167153663f4cfd02c85b8f47b5'),
+                backgroundImage: NetworkImage('${model.image}'),
               ),
               const SizedBox(
                 width: 15.0,
@@ -151,7 +153,7 @@ Widget buildPostItem(context) => Card(
                       children:
                       [
                         Text(
-                          'ALy Muhammad',
+                          '${model.name}',
                           style: TextStyle(
                             color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
                             height: 1.4,
@@ -168,7 +170,7 @@ Widget buildPostItem(context) => Card(
                       ],
                     ),
                     Text(
-                      'June 15, 2023 at 11:00 PM',
+                      '${model.dateTime}',
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         height: 1.4,
                         color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
@@ -199,7 +201,7 @@ Widget buildPostItem(context) => Card(
             ),
           ),
           Text(
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            '${model.text}',
             style: Theme.of(context).textTheme.titleSmall,
           ),
           Padding(
@@ -250,14 +252,18 @@ Widget buildPostItem(context) => Card(
               ),
             ),
           ),
-          Container(
-            height: 140.0,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
-              image: const DecorationImage(
-                image: NetworkImage('https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg'),
-                fit: BoxFit.cover,
+          if(model.postImage != '')
+            Padding(
+            padding: const EdgeInsetsDirectional.only(top: 15.0),
+            child: Container(
+              height: 140.0,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4.0),
+                image: DecorationImage(
+                  image: NetworkImage('${model.postImage}'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -285,7 +291,7 @@ Widget buildPostItem(context) => Card(
                                 width: 5.0,
                               ),
                               Text(
-                                '1200',
+                                '0',
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                   color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
                                 ),
@@ -318,7 +324,7 @@ Widget buildPostItem(context) => Card(
                                 width: 5.0,
                               ),
                               Text(
-                                '120 Comments',
+                                '0 Comments',
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                   color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
                                 ),
@@ -349,9 +355,9 @@ Widget buildPostItem(context) => Card(
                   child: Row(
                     children:
                     [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 18.0,
-                        backgroundImage: NetworkImage('https://img.freepik.com/free-photo/carefree-joyful-handsome-afro-american-man-with-bushy-hairstyle_273609-14083.jpg?w=900&t=st=1686838506~exp=1686839106~hmac=3a52c2d1354134fd0073268b8229b31410a859167153663f4cfd02c85b8f47b5'),
+                        backgroundImage: NetworkImage('${SocialCubit.get(context).userModel!.image}'),
                       ),
                       const SizedBox(
                         width: 15.0,

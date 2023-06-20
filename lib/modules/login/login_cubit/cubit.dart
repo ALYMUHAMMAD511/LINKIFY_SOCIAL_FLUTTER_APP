@@ -38,8 +38,7 @@ class LoginCubit extends Cubit <LoginStates> {
 
   void changePasswordVisibility() {
     isPasswordShown = !isPasswordShown;
-    suffix =
-    isPasswordShown ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    suffix = isPasswordShown ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(ChangeLoginPasswordVisibilityState());
   }
 }
