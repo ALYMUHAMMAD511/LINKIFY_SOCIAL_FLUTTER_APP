@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SocialCubit()..getUserData()..getPosts()..changeThemeMode(fromShared: isDark),
+          create: (context) => SocialCubit()..getUserData()..getPosts()..getAllUsers()..changeThemeMode(fromShared: isDark),
         ),
       ],
       child: BlocConsumer<SocialCubit, SocialStates>(

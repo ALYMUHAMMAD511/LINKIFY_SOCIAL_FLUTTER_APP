@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/models/post_model.dart';
+import 'package:social_app/models/user_model.dart';
 import 'package:social_app/shared/styles/colors.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 
@@ -123,7 +124,7 @@ void printFullText(String text)
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
 
-Widget buildPostItem(PostModel model, context) => Card(
+Widget buildPostItem(PostModel model, context, index) => Card(
     color: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5.0,
@@ -291,7 +292,7 @@ Widget buildPostItem(PostModel model, context) => Card(
                                 width: 5.0,
                               ),
                               Text(
-                                '0',
+                                '${SocialCubit.get(context).likes[index]}',
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                   color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
                                 ),
@@ -374,7 +375,10 @@ Widget buildPostItem(PostModel model, context) => Card(
                 ),
               ),
               InkWell(
-                onTap: (){},
+                onTap: ()
+                {
+                  SocialCubit.get(context).likePost(SocialCubit.get(context).postsId[index]);
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Row(
@@ -408,6 +412,32 @@ Widget buildPostItem(PostModel model, context) => Card(
         ],
       ),
     )
+);
+
+Widget buildChatItem(UserModel model ,context) => InkWell(
+  onTap: (){},
+  child: Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Row(
+      children:
+      [
+        CircleAvatar(
+          radius: 25.0,
+          backgroundImage: NetworkImage('${model.image}'),
+        ),
+        const SizedBox(
+          width: 15.0,
+        ),
+        Text(
+          '${model.name}',
+          style: TextStyle(
+            color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+            height: 1.4,
+          ),
+        ),
+      ],
+    ),
+  ),
 );
 
 PreferredSizeWidget defaultAppBar({

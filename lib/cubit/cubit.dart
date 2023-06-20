@@ -199,7 +199,8 @@ class SocialCubit extends Cubit <SocialStates> {
     required String phone,
     String? cover,
     String? image,
-  }){
+  })
+  {
     UserModel model = UserModel(
       email: userModel!.email,
       uId: uId,
@@ -314,9 +315,12 @@ class SocialCubit extends Cubit <SocialStates> {
   }
 
   List <PostModel> posts = [];
+  List <String> postsId = [];
+  List <int> likes = [];
 
   void getPosts()
   {
+    emit(SocialGetPostsLoadingState());
     FirebaseFirestore.instance
         .collection('posts')
         .get()
@@ -324,13 +328,64 @@ class SocialCubit extends Cubit <SocialStates> {
     {
       for (var element in value.docs)
       {
-        posts.add(PostModel.fromJson(element.data()));
+        element.reference
+            .collection('likes')
+            .get()
+            .then((value)
+        {
+          likes.add(value.docs.length);
+          postsId.add(element.id);
+          posts.add(PostModel.fromJson(element.data()));
+        })
+            .catchError((error) {});
       }
       emit(SocialGetPostsSuccessState());
     })
         .catchError((error)
     {
       emit(SocialGetPostsErrorState(error.toString()));
+    });
+  }
+
+  void likePost(String postId)
+  {
+    FirebaseFirestore.instance
+        .collection('posts')
+        .doc(postId)
+        .collection('likes')
+        .doc(userModel!.uId)
+        .set({
+      'like' : true,
+    })
+        .then((value)
+    {
+      emit(SocialLikePostSuccessState());
+    })
+        .catchError((error)
+    {
+      emit(SocialLikePostErrorState(error.toString()));
+    });
+  }
+
+  List <UserModel> users = [];
+
+  void getAllUsers()
+  {
+    emit(SocialGetPostsLoadingState());
+    FirebaseFirestore.instance
+        .collection('users')
+        .get()
+        .then((value)
+    {
+      for (var element in value.docs)
+      {
+          users.add(UserModel.fromJson(element.data()));
+      }
+      emit(SocialGetAllUsersSuccessState());
+    })
+        .catchError((error)
+    {
+      emit(SocialGetAllUsersErrorState(error.toString()));
     });
   }
 

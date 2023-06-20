@@ -12,11 +12,11 @@ class FeedsScreen extends StatelessWidget {
   Widget build(BuildContext context)
   {
     return BlocConsumer <SocialCubit, SocialStates>(
-      listener: (context, state){},
+      listener: (context, state) {},
       builder: (context, state)
       {
         return ConditionalBuilder(
-          condition: SocialCubit.get(context).posts.isNotEmpty,
+          condition: SocialCubit.get(context).posts.isNotEmpty && SocialCubit.get(context).userModel != null,
           builder: (context) => SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -47,7 +47,7 @@ class FeedsScreen extends StatelessWidget {
                   ),
                 ),
                 ListView.separated(
-                  itemBuilder: (context, index) => buildPostItem(SocialCubit.get(context).posts[index],context),
+                  itemBuilder: (context, index) => buildPostItem(SocialCubit.get(context).posts[index],context, index),
                   separatorBuilder: (context, index) => const SizedBox(
                     height: 10.0,
                   ),
