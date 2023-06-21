@@ -146,50 +146,42 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                children:
-                [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: 40.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3.0),
-                        color: defaultColor,
-                      ),
-                      child: MaterialButton(
-                        onPressed: (){},
-                        child:  Text(
-                          'Add Photos'.toUpperCase(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
-                      ),
-                    ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: 40.0,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3.0),
+                    color: defaultColor,
                   ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      height: 40.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3.0),
-                        color: defaultColor,
-                      ),
-                      child: MaterialButton(
-                        onPressed: ()
-                        {
-                          navigateTo(context, EditProfileScreen());
-                        },
-                        child: const Icon(
+                  child: MaterialButton(
+                    onPressed: ()
+                    {
+                      navigateTo(context, EditProfileScreen());
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
                           IconBroken.Edit,
                           size: 18.0,
                           color: Colors.white,
                         ),
-                      ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        Text(
+                          'Edit Profile',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),

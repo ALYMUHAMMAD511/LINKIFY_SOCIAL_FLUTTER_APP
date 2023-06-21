@@ -648,11 +648,11 @@ void showModel(context, PostModel model) {
       context: context,
       builder: (context) {
         return Container(
-          height: 272.0,
+          height: 185.0,
           padding: const EdgeInsetsDirectional.only(top: 10),
-          decoration: const BoxDecoration(
-            //color: Colors.grey[300],
-            borderRadius: BorderRadiusDirectional.only(
+          decoration: BoxDecoration(
+            color: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
+            borderRadius: const BorderRadiusDirectional.only(
               topStart: Radius.circular(20),
               topEnd: Radius.circular(20),
             ),
@@ -676,26 +676,38 @@ void showModel(context, PostModel model) {
                   },
                   child: Row(
                     children: [
-                      const Icon(
-                        IconBroken.Heart,
-                        size: 30,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Icon(
+                          IconBroken.Heart,
+                          size: 30,
+                          color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                        ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(
+                          width: 10.0,
+                      ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Add to favorites",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            const SizedBox(height: 5),
+                          children:
+                          [
                             Text(
-                              "Add this to your favorites item",
+                              "Add to Favorites",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 5.0),
+                            Text(
+                              "Add this Post to your Favorites",
                               style: Theme
                                   .of(context)
                                   .textTheme
-                                  .bodySmall,
+                                  .bodySmall!.copyWith(
+                                color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black54,
+                              ),
                             )
                           ],
                         ),
@@ -723,69 +735,47 @@ void showModel(context, PostModel model) {
                   },
                   child: Row(
                     children: [
-                      const Icon(
-                        IconBroken.Time_Circle,
-                        size: 30,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Icon(
+                          IconBroken.Time_Circle,
+                          size: 30,
+                          color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                        ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(
+                          width: 10.0,
+                      ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Add to watch later",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            const SizedBox(height: 5),
+                          children:
+                          [
                             Text(
-                              "Add this to your watch later item",
+                              "Add to Watch Later",
+                              style: TextStyle
+                                (
+                                fontSize: 18.0,
+                                color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                            const SizedBox(
+                                height: 5.0,
+                            ),
+                            Text(
+                              "Add this Post to your Watch Later",
                               style: Theme
                                   .of(context)
                                   .textTheme
-                                  .bodySmall,
+                                  .bodySmall!.copyWith(
+                                color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black54
+                              ),
                             )
                           ],
                         ),
                       )
                     ],
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  height: 1,
-                  width: double.infinity,
-                  color: Colors.grey,
-                ),
-                InkWell(
-                  child: Row(
-                    children: [
-                      const Icon(
-                        IconBroken.Delete,
-                        size: 30,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Remove",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              "Remove this from your timeline",
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .bodySmall,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  onTap: (){},
                 ),
               ],
             ),
