@@ -148,7 +148,7 @@ class UsersScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -162,7 +162,7 @@ class UsersScreen extends StatelessWidget {
                         SocialCubit.get(context).signOut(context);
                       },
                       text: "Log Out"),
-                )
+                ),
               ],
             ),
           ),
