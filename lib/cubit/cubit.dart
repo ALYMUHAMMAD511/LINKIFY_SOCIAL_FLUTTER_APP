@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,11 +10,13 @@ import 'package:social_app/models/comments_model.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/modules/chats/chats_screen.dart';
 import 'package:social_app/modules/feeds/feeds_screen.dart';
-import 'package:social_app/modules/new_post/new_post_screen.dart';
 import 'package:social_app/modules/users/users_screen.dart';
 import 'package:social_app/shared/components/constants.dart';
 import '../models/post_model.dart';
+import '../modules/login/login_screen.dart';
+import '../modules/new post/new_post_screen.dart';
 import '../modules/profile/profile_screen.dart';
+import '../shared/components/components.dart';
 import '../shared/network/local/cache_helper.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -491,7 +494,8 @@ class SocialCubit extends Cubit <SocialStates> {
 
   List <UserModel> users = [];
 
-  void getAllUsers() {
+  void getAllUsers()
+  {
     emit(SocialGetPostsLoadingState());
     if (users.isEmpty)
     {
@@ -508,6 +512,239 @@ class SocialCubit extends Cubit <SocialStates> {
         emit(SocialGetAllUsersErrorState(error.toString()));
       });
     }
+  }
+
+  List<int> userPosts = [];
+  var postLength;
+  var PostUId;
+
+  void getUserPostsLength()
+  {
+    emit(SocialGetMessageLoginState());
+    userPosts = [];
+    var userPostsCount = FirebaseFirestore.instance.collection('posts');
+    userPostsCount.where('uId', isEqualTo: uId).get()
+        .then((value)
+    {
+      for (var element in value.docs)
+      {
+        userPosts.add(element.data().length);
+      }
+      postLength = userPosts.length;
+      emit(SocialGetUserPostsLengthSuccessState());
+    })
+        .catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error.toString());
+      }
+      emit(SocialGetUserPostsLengthErrorState());
+    });
+  }
+
+  List<dynamic> followersLength = [];
+  var followersCount;
+
+  void getUserFollowersLength()
+  {
+    emit(SocialGetUserFollowersLengthLoadingState());
+    followersLength = [];
+    var userFollowersCount = FirebaseFirestore.instance.collection('users');
+    userFollowersCount.doc(uId).collection("chats").get().then((value) {
+      followersCount = value.docs.length;
+      if (kDebugMode)
+      {
+        print(followersCount);
+      }
+
+      emit(SocialGetUserFollowersLengthSuccessState());
+    })
+        .catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error.toString());
+      }
+      emit(SocialGetUserFollowersLengthErrorState());
+    });
+  }
+
+  void addToFavorites({
+    String? name,
+    String? uId,
+    String? image,
+    String? dateTime,
+    String? text,
+    String? postImage,
+    String? postsId,
+  }) {
+    emit(SocialAddToFavoritesLoadingState());
+    PostModel postModel = PostModel(
+        dateTime: dateTime,
+        uId: uId,
+        image: image,
+        name: name,
+        postImage: postImage ?? '',
+        text: text ?? '');
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(userModel!.uId)
+        .collection("favoritesList")
+        .add(postModel.toMap())
+        .then((value)
+    {
+      emit(SocialAddToFavoritesSuccessState());
+    })
+        .catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error.toString());
+      }
+      emit(SocialAddToFavoritesErrorState());
+    });
+  }
+
+  List<PostModel> favoritesList = [];
+
+  void getFavoritesList()
+  {
+    favoritesList = [];
+    emit(SocialGetFavoritesLoadingState());
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(userModel!.uId)
+        .collection("favoritesList")
+        .get()
+        .then((value)
+    {
+      for (var element in value.docs)
+      {
+        favoritesList.add(PostModel.fromJson(element.data()));
+      }
+      if (kDebugMode)
+      {
+        print(favoritesList.length);
+      }
+      emit(SocialGetFavoritesSuccessState());
+    })
+        .catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error.toString());
+      }
+      emit(SocialGetFavoritesErrorState());
+    });
+  }
+
+  void removeFromFavorites(postId)
+  {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(userModel!.uId)
+        .collection("favoritesList")
+        .doc(postId)
+        .delete()
+        .then((value)
+    {
+      emit(SocialRemoveFromFavoritesSuccessState());
+    })
+        .catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error);
+      }
+      emit(SocialRemoveFromFavoritesErrorState());
+    });
+  }
+
+  void addToWatchLater({
+    String? name,
+    String? uId,
+    String? image,
+    String? dateTime,
+    String? text,
+    String? postImage,
+    String? postsId,
+  })
+  {
+    emit(SocialAddToWatchLaterLoadingState());
+    PostModel postModel = PostModel(
+        dateTime: dateTime,
+        uId: uId,
+        image: image,
+        name: name,
+        postImage: postImage ?? '',
+        text: text ?? '');
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(userModel!.uId)
+        .collection("watchLaterList")
+        .add(postModel.toMap())
+        .then((value)
+    {
+      emit(SocialAddToWatchLaterSuccessState());
+    })
+        .catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error.toString());
+      }
+      emit(SocialAddToWatchLaterErrorState());
+    });
+  }
+
+  List<PostModel> watchLaterList = [];
+  void getWatchLaterList()
+  {
+    watchLaterList = [];
+    emit(SocialGetWatchLaterLoadingState());
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(userModel!.uId)
+        .collection("watchLaterList")
+        .get()
+        .then((value)
+    {
+      for (var element in value.docs)
+      {
+        watchLaterList.add(PostModel.fromJson(element.data()));
+      }
+      if (kDebugMode)
+      {
+        print(favoritesList.length);
+      }
+      emit(SocialGetWatchLaterSuccessState());
+    })
+        .catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error.toString());
+      }
+      emit(SocialGetWatchLaterErrorState());
+    });
+  }
+
+  void signOut(context)
+  {
+    FirebaseAuth.instance.signOut().
+    then((value)
+    {
+      navigateTo(context, LoginScreen());
+      emit(SocialUserSignOutSuccessState());
+    }).catchError((error)
+    {
+      if (kDebugMode)
+      {
+        print(error.toString());
+      }
+      emit(SocialUserSignOutErrorState());
+    });
   }
 
   late bool isDark = false;

@@ -140,10 +140,10 @@ class NewPostScreen extends StatelessWidget
                           {
                             SocialCubit.get(context).getPostImage();
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:
-                            const [
+                            [
                               Icon(
                                   IconBroken.Image,
                               ),
@@ -155,14 +155,6 @@ class NewPostScreen extends StatelessWidget
                               ),
                             ],
                           ),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: (){},
-                        child: const Text(
-                          '# Tags',
-                        ),
                       ),
                     ),
                   ],
