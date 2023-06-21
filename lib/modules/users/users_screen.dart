@@ -9,11 +9,10 @@ import 'package:social_app/shared/components/components.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 
 class UsersScreen extends StatelessWidget {
-  const UsersScreen ({Key? key}) : super(key: key);
+  const UsersScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -28,7 +27,9 @@ class UsersScreen extends StatelessWidget {
                     navigateTo(context, const FavoritesScreen());
                   }),
                   child: Card(
-                    color: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
+                    color: SocialCubit
+                        .get(context)
+                        .isDark ? HexColor('333739') : Colors.white,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     elevation: 5.0,
                     margin: const EdgeInsets.symmetric(
@@ -48,7 +49,9 @@ class UsersScreen extends StatelessWidget {
                             children: [
                               Icon(
                                 IconBroken.Heart,
-                                color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                                color: SocialCubit
+                                    .get(context)
+                                    .isDark ? Colors.white : Colors.black,
                               ),
                               const SizedBox(width: 5.0),
                               Text(
@@ -56,16 +59,23 @@ class UsersScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
-                                  color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                                  color: SocialCubit
+                                      .get(context)
+                                      .isDark ? Colors.white : Colors.black,
                                 ),
                               ),
                               const Spacer(),
                               Text(
-                                "${SocialCubit.get(context).favoritesList.length}",
+                                "${SocialCubit
+                                    .get(context)
+                                    .favoritesList
+                                    .length}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18.0,
-                                  color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                                  color: SocialCubit
+                                      .get(context)
+                                      .isDark ? Colors.white : Colors.black,
                                 ),
                               ),
                             ],
@@ -76,14 +86,16 @@ class UsersScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                    height: 20.0,
+                  height: 20.0,
                 ),
                 InkWell(
                   onTap: (() {
                     navigateTo(context, const WatchLaterScreen());
                   }),
                   child: Card(
-                    color: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
+                    color: SocialCubit
+                        .get(context)
+                        .isDark ? HexColor('333739') : Colors.white,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     elevation: 5.0,
                     margin: const EdgeInsets.symmetric(
@@ -103,26 +115,35 @@ class UsersScreen extends StatelessWidget {
                             children: [
                               Icon(
                                 IconBroken.Time_Circle,
-                                color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                                color: SocialCubit
+                                    .get(context)
+                                    .isDark ? Colors.white : Colors.black,
                               ),
                               const SizedBox(
-                                  width: 5.0,
+                                width: 5.0,
                               ),
                               Text(
                                 "Watch Later",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0,
-                                  color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                                  color: SocialCubit
+                                      .get(context)
+                                      .isDark ? Colors.white : Colors.black,
                                 ),
                               ),
                               const Spacer(),
                               Text(
-                                "${SocialCubit.get(context).watchLaterList.length}",
+                                "${SocialCubit
+                                    .get(context)
+                                    .watchLaterList
+                                    .length}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18.0,
-                                  color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                                  color: SocialCubit
+                                      .get(context)
+                                      .isDark ? Colors.white : Colors.black,
                                 ),
                               ),
                             ],
@@ -134,10 +155,10 @@ class UsersScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30.0),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8, vertical: 10),
                   child: defaultButton(
-                      onPressed: ()
-                      {
+                      onPressed: () {
                         SocialCubit.get(context).signOut(context);
                       },
                       text: "Log Out"),
