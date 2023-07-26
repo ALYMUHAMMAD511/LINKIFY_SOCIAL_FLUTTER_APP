@@ -108,7 +108,7 @@ class SettingsScreen extends StatelessWidget
                         const Image(
                           width: double.infinity,
                           image: NetworkImage(
-                              "https://img.freepik.com/free-photo/white-alarm-clock-sticker-with-inscription-late-blue-background_169016-33777.jpg?w=900&t=st=1687380385~exp=1687380985~hmac=279b585bfa990e9ef3fafca353370aee4ee3d47435b36a80a560c678ea600e83"),
+                              "https://img.freepik.com/free-photo/bookmark-ribbon-add-new-favorite-sign-symbol-icon-bubble-speech-chat-3d-rendering_56104-1916.jpg?w=1060&t=st=1690413966~exp=1690414566~hmac=4fd301e80028988b37bf3e62e26c80f0da868c4ea29706421804aba887a4f056"),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
