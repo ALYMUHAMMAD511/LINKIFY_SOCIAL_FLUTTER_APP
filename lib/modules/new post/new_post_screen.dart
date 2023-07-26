@@ -19,7 +19,7 @@ class NewPostScreen extends StatelessWidget
       builder: (context, state)
       {
         var postImage = SocialCubit.get(context).postImage;
-
+        var model = SocialCubit.get(context).userModel;
 
         return Scaffold(
           appBar: defaultAppBar(
@@ -64,16 +64,16 @@ class NewPostScreen extends StatelessWidget
                 Row(
                   children:
                   [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 25.0,
-                      backgroundImage: NetworkImage('https://img.freepik.com/free-photo/carefree-joyful-handsome-afro-american-man-with-bushy-hairstyle_273609-14083.jpg?w=900&t=st=1686838506~exp=1686839106~hmac=3a52c2d1354134fd0073268b8229b31410a859167153663f4cfd02c85b8f47b5'),
+                      backgroundImage: NetworkImage('${model!.image}'),
                     ),
                     const SizedBox(
                       width: 15.0,
                     ),
                     Expanded(
                       child: Text(
-                        'ALy Muhammad',
+                        '${model.name}',
                         style: TextStyle(
                           color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
                           height: 1.4,
@@ -86,7 +86,7 @@ class NewPostScreen extends StatelessWidget
                   child: TextFormField(
                     controller: textController,
                     decoration: InputDecoration(
-                      hintText: 'What is on your mind, ALy?',
+                      hintText: 'What is on your mind, ${model.name}',
                       hintStyle: TextStyle(
                         color: SocialCubit.get(context).isDark ? Colors.white54 : Colors.black45,
                       ),
