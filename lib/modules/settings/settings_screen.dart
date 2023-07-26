@@ -115,7 +115,7 @@ class SettingsScreen extends StatelessWidget
                           child: Row(
                             children: [
                               Icon(
-                                IconBroken.Time_Circle,
+                                IconBroken.Document,
                                 color: SocialCubit
                                     .get(context)
                                     .isDark ? Colors.white : Colors.black,

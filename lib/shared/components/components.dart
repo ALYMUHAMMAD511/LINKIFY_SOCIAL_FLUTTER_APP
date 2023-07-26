@@ -700,7 +700,7 @@ void showModel(context, PostModel model) {
                                 color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
                               ),
                             ),
-                            const SizedBox(height: 5.0),
+                            const SizedBox(height: 4.0),
                             Text(
                               "Add this Post to your Favorites",
                               style: Theme
@@ -761,7 +761,7 @@ void showModel(context, PostModel model) {
                               ),
                             ),
                             const SizedBox(
-                                height: 5.0,
+                                height: 4.0,
                             ),
                             Text(
                               "Add this Post to your Saved Posts",
