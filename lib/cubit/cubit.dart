@@ -57,11 +57,12 @@ class SocialCubit extends Cubit<SocialStates> {
     'Home',
     'Chats',
     'Post',
-    'Users',
+    'Settings',
     'Profile',
   ];
 
-  void changeBottomNav(int index) {
+  void changeBottomNav(int index)
+  {
     if (index == 1)
     {
       getAllUsers();
