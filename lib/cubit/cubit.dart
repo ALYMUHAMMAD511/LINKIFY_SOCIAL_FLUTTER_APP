@@ -10,7 +10,7 @@ import 'package:social_app/models/comments_model.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/modules/chats/chats_screen.dart';
 import 'package:social_app/modules/feeds/feeds_screen.dart';
-import 'package:social_app/modules/users/users_screen.dart';
+import 'package:social_app/modules/settings/settings_screen.dart';
 import 'package:social_app/shared/components/constants.dart';
 import '../models/post_model.dart';
 import '../modules/login/login_screen.dart';
@@ -49,7 +49,7 @@ class SocialCubit extends Cubit<SocialStates> {
     const FeedsScreen(),
     const ChatsScreen(),
     NewPostScreen(),
-    const UsersScreen(),
+    const SettingsScreen(),
     const ProfileScreen(),
   ];
 
@@ -62,6 +62,10 @@ class SocialCubit extends Cubit<SocialStates> {
   ];
 
   void changeBottomNav(int index) {
+    if (index == 1)
+    {
+      getAllUsers();
+    }
     if (index == 2) {
       emit(SocialNewPostState());
     } else {

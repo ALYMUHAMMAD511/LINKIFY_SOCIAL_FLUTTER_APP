@@ -649,13 +649,13 @@ void showModel(context, PostModel model) {
       context: context,
       builder: (context) {
         return Container(
-          height: 185.0,
-          padding: const EdgeInsetsDirectional.only(top: 10),
+          height: 200.0,
+          padding: const EdgeInsetsDirectional.only(top: 10.0),
           decoration: BoxDecoration(
             color: SocialCubit.get(context).isDark ? HexColor('333739') : Colors.white,
             borderRadius: const BorderRadiusDirectional.only(
-              topStart: Radius.circular(20),
-              topEnd: Radius.circular(20),
+              topStart: Radius.circular(20.0),
+              topEnd: Radius.circular(20.0),
             ),
           ),
           child: Padding(
@@ -739,7 +739,7 @@ void showModel(context, PostModel model) {
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
                         child: Icon(
-                          IconBroken.Time_Circle,
+                          IconBroken.Document,
                           size: 30,
                           color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
                         ),
@@ -753,7 +753,7 @@ void showModel(context, PostModel model) {
                           children:
                           [
                             Text(
-                              "Add to Watch Later",
+                              "Save the Post",
                               style: TextStyle
                                 (
                                 fontSize: 18.0,
@@ -764,7 +764,7 @@ void showModel(context, PostModel model) {
                                 height: 5.0,
                             ),
                             Text(
-                              "Add this Post to your Watch Later",
+                              "Add this Post to your Saved Posts",
                               style: Theme
                                   .of(context)
                                   .textTheme

@@ -8,9 +8,9 @@ import 'package:social_app/modules/saved%20posts/saved_posts_screen.dart';
 import 'package:social_app/shared/components/components.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 
-class UsersScreen extends StatelessWidget
+class SettingsScreen extends StatelessWidget
 {
-  const UsersScreen({Key? key}) : super(key: key);
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
