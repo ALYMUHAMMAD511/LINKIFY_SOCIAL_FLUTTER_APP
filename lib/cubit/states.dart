@@ -104,52 +104,38 @@ class SocialGetCommentsErrorState extends SocialStates
   SocialGetCommentsErrorState(this.error);
 }
 
-class SocialGetMessageLoginState extends SocialStates {}
-
-class SocialGetUserPostsLengthSuccessState extends SocialStates {}
-
-class SocialGetUserPostsLengthLoadingState extends SocialStates {}
-
-class SocialGetUserPostsLengthErrorState extends SocialStates {}
-
-class SocialGetUserFollowersLengthSuccessState extends SocialStates {}
-
-class SocialGetUserFollowersLengthLoadingState extends SocialStates {}
-
-class SocialGetUserFollowersLengthErrorState extends SocialStates {}
+class SocialAddToFavoritesLoadingState extends SocialStates {}
 
 class SocialAddToFavoritesSuccessState extends SocialStates {}
 
-class SocialAddToFavoritesLoadingState extends SocialStates {}
-
 class SocialAddToFavoritesErrorState extends SocialStates {}
-
-class SocialGetFavoritesSuccessState extends SocialStates {}
 
 class SocialGetFavoritesLoadingState extends SocialStates {}
 
-class SocialGetFavoritesErrorState extends SocialStates {}
+class SocialGetFavoritesSuccessState extends SocialStates {}
 
-class SocialRemoveFromFavoritesSuccessState extends SocialStates {}
+class SocialGetFavoritesErrorState extends SocialStates {}
 
 class SocialRemoveFromFavoritesLoadingState extends SocialStates {}
 
+class SocialRemoveFromFavoritesSuccessState extends SocialStates {}
+
 class SocialRemoveFromFavoritesErrorState extends SocialStates {}
 
-class SocialAddToWatchLaterSuccessState extends SocialStates {}
+class SocialSavePostLoadingState extends SocialStates {}
 
-class SocialAddToWatchLaterLoadingState extends SocialStates {}
+class SocialSavePostSuccessState extends SocialStates {}
 
-class SocialAddToWatchLaterErrorState extends SocialStates {}
+class SocialSavePostErrorState extends SocialStates {}
 
-class SocialGetWatchLaterSuccessState extends SocialStates {}
+class SocialGetSavedPostsLoadingState extends SocialStates {}
 
-class SocialGetWatchLaterLoadingState extends SocialStates {}
+class SocialGetSavedPostsSuccessState extends SocialStates {}
 
-class SocialGetWatchLaterErrorState extends SocialStates {}
+class SocialGetSavedPostsErrorState extends SocialStates {}
 
-class SocialUserSignOutSuccessState extends SocialStates {}
+class SocialUserLogoutSuccessState extends SocialStates {}
 
-class SocialUserSignOutErrorState extends SocialStates {}
+class SocialUserLogoutErrorState extends SocialStates {}
 
 class AppChangeThemeModeState extends SocialStates {}

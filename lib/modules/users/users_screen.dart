@@ -4,11 +4,12 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/cubit/states.dart';
 import 'package:social_app/modules/favorites/favorites_screen.dart';
-import 'package:social_app/modules/watch%20later/watch_later_screen.dart';
+import 'package:social_app/modules/saved%20posts/saved_posts_screen.dart';
 import 'package:social_app/shared/components/components.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 
-class UsersScreen extends StatelessWidget {
+class UsersScreen extends StatelessWidget
+{
   const UsersScreen({Key? key}) : super(key: key);
 
   @override
@@ -90,7 +91,7 @@ class UsersScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: (() {
-                    navigateTo(context, const WatchLaterScreen());
+                    navigateTo(context, const SavedPostsScreen());
                   }),
                   child: Card(
                     color: SocialCubit
@@ -123,7 +124,7 @@ class UsersScreen extends StatelessWidget {
                                 width: 5.0,
                               ),
                               Text(
-                                "Watch Later",
+                                "Saved Posts",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0,
@@ -136,7 +137,7 @@ class UsersScreen extends StatelessWidget {
                               Text(
                                 "${SocialCubit
                                     .get(context)
-                                    .watchLaterList
+                                    .savedPosts
                                     .length}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -159,7 +160,7 @@ class UsersScreen extends StatelessWidget {
                       horizontal: 8, vertical: 10),
                   child: defaultButton(
                       onPressed: () {
-                        SocialCubit.get(context).signOut(context);
+                        SocialCubit.get(context).logout(context);
                       },
                       text: "Log Out"),
                 ),

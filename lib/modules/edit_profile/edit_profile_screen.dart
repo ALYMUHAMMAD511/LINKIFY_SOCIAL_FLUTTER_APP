@@ -61,7 +61,7 @@ class EditProfileScreen extends StatelessWidget
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Container(
+                  SizedBox(
                     height: 190.0,
                     child: Stack(
                         alignment: AlignmentDirectional.bottomCenter,

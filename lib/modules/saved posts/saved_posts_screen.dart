@@ -5,8 +5,8 @@ import 'package:social_app/cubit/states.dart';
 import 'package:social_app/shared/components/components.dart';
 
 
-class WatchLaterScreen extends StatelessWidget {
-  const WatchLaterScreen({Key? key}) : super(key: key);
+class SavedPostsScreen extends StatelessWidget {
+  const SavedPostsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +15,18 @@ class WatchLaterScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Watch Later"),
+            title: const Text("Saved Posts"),
           ),
           body: ListView.separated(
             itemBuilder: (context, index) =>
                 buildPostItem(
                     SocialCubit
                         .get(context)
-                        .watchLaterList[index], index, context),
+                        .savedPosts[index], index, context),
             separatorBuilder: (context, index) => const SizedBox(height: 10),
             itemCount: SocialCubit
                 .get(context)
-                .watchLaterList
+                .savedPosts
                 .length,
           ),
         );

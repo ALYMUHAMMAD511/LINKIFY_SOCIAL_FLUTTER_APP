@@ -2,7 +2,7 @@ class CommentsModel {
   String? name;
   String? uId;
   String? image;
-  String? text;
+  String? commentText;
   String? commentImage;
   String? postId;
 
@@ -11,7 +11,7 @@ class CommentsModel {
         this.name,
         this.uId,
         this.image,
-        this.text,
+        this.commentText,
         this.commentImage,
         this.postId
       });
@@ -21,7 +21,7 @@ class CommentsModel {
     name = json['name'];
     uId = json['uId'];
     image = json['image'];
-    text = json['text'];
+    commentText = json['commentText'];
     commentImage = json['commentImage'];
     postId = json['postId'];
   }
@@ -32,8 +32,8 @@ class CommentsModel {
         'name': name,
         'uId': uId,
         'image': image,
-        'textComment': text,
-        'imageComment': commentImage,
+        'commentText': commentText,
+        'commentImage': commentImage,
         'postId': postId
     };
   }

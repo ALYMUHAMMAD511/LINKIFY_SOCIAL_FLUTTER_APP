@@ -4,6 +4,7 @@ import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/models/comments_model.dart';
 import 'package:social_app/models/post_model.dart';
 import 'package:social_app/models/user_model.dart';
+import 'package:social_app/modules/comments/comments_screen.dart';
 import 'package:social_app/shared/styles/colors.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
 PreferredSizeWidget defaultAppBar({
@@ -328,8 +329,8 @@ Widget buildPostItem(PostModel model, context, index) => Card(
                 Expanded(
                   child: InkWell(
                     onTap: (){},
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children:
@@ -337,20 +338,20 @@ Widget buildPostItem(PostModel model, context, index) => Card(
                           Row(
                             children:
                             [
-                              Icon(
+                              const Icon(
                                 IconBroken.Chat,
                                 size: 17.0,
                                 color: Colors.amber,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5.0,
                               ),
-                              // Text(
-                              //   '${SocialCubit.get(context).postsComments[index]}',
-                              //   style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                              //     color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
-                              //   ),
-                              // ),
+                              Text(
+                                '${SocialCubit.get(context).comments[index]}',
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                  color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
+                                ),
+                              ),
                             ],
                           ),
                         ],
@@ -394,11 +395,11 @@ Widget buildPostItem(PostModel model, context, index) => Card(
                   ),
                   onTap: ()
                   {
-                    // navigateTo(
-                    //     context,
-                    //     CommentsScreen(
-                    //       uIdIndex: SocialCubit.get(context).postsId[index],
-                    //     ));
+                    navigateTo(
+                        context,
+                        CommentsScreen(
+                          uIdIndex: SocialCubit.get(context).postsId[index],
+                        ));
                   },
                 ),
               ),
@@ -490,10 +491,10 @@ Widget buildCommentItem(context, CommentsModel model) => Column(
                   padding: const EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
-                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   ),
                   child: Text(
-                    '${model.text}',
+                    '${model.commentText}',
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith
                       (
                         height: 1.6,
@@ -723,7 +724,7 @@ void showModel(context, PostModel model) {
                 ),
                 InkWell(
                   onTap: () {
-                    SocialCubit.get(context).addToWatchLater(
+                    SocialCubit.get(context).savePost(
                       dateTime: model.dateTime,
                       image: model.image,
                       name: model.name,

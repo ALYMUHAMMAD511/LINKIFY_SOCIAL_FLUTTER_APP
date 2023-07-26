@@ -11,7 +11,6 @@ import 'package:social_app/shared/network/local/cache_helper.dart';
 import 'package:social_app/shared/styles/themes.dart';
 import 'cubit/cubit.dart';
 
-
 Future <void> main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
