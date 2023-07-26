@@ -54,12 +54,17 @@ class CommentsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         hintText: 'Write a Comment ...',
-                        hintStyle: const TextStyle(
-                          color: Colors.grey,
+                        hintStyle: TextStyle(
+                          color: cubit.isDark ? Colors.white54 : Colors.black45,
+                          fontSize: 14.0,
                         ),
                         prefixIcon: InkWell(
-                          child: const Icon(Icons.camera_alt),
-                          onTap: () {
+                          child: const Icon(
+                              Icons.camera_alt,
+                            color: Colors.grey,
+                          ),
+                          onTap: ()
+                          {
                             cubit.getCommentImage();
                           },
                         ),
@@ -85,6 +90,7 @@ class CommentsScreen extends StatelessWidget {
                           },
                           icon: const Icon(
                             Icons.send,
+                            color: Colors.grey,
                           ),
                         ),
                       ),

@@ -143,8 +143,11 @@ class LoginScreen extends StatelessWidget {
                         child: Row(
                           children:
                           [
-                            const Text(
+                            Text(
                               'Don\'t have an Account?',
+                              style: TextStyle(
+                                color: SocialCubit.get(context).isDark ? Colors.white : Colors.black,
+                              ),
                             ),
                             defaultTextButton(
                               onPressed: ()
