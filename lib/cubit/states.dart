@@ -134,6 +134,12 @@ class SocialGetSavedPostsSuccessState extends SocialStates {}
 
 class SocialGetSavedPostsErrorState extends SocialStates {}
 
+class SocialSendMessageSuccessState extends SocialStates {}
+
+class SocialSendMessageErrorState extends SocialStates {}
+
+class SocialGetMessagesSuccessState extends SocialStates {}
+
 class SocialUserLogoutSuccessState extends SocialStates {}
 
 class SocialUserLogoutErrorState extends SocialStates {}

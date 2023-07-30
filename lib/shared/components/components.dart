@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/models/comments_model.dart';
+import 'package:social_app/models/message_model.dart';
 import 'package:social_app/models/post_model.dart';
 import 'package:social_app/models/user_model.dart';
+import 'package:social_app/modules/chat_details/chat_details_screen.dart';
 import 'package:social_app/modules/comments/comments_screen.dart';
 import 'package:social_app/shared/styles/colors.dart';
 import 'package:social_app/shared/styles/icon_broken.dart';
@@ -613,7 +615,10 @@ Widget buildFavoritesPostItem(PostModel postModel, context, index) => Card(
 );
 
 Widget buildChatItem(UserModel model ,context) => InkWell(
-  onTap: (){},
+  onTap: ()
+  {
+    navigateTo(context, ChatDetailsScreen(userModel: model));
+  },
   child: Padding(
     padding: const EdgeInsets.all(20.0),
     child: Row(
@@ -784,3 +789,45 @@ void showModel(context, PostModel model) {
         );
       });
 }
+
+Widget buildReceiverMessage(MessageModel messageModel) => Align(
+  alignment: AlignmentDirectional.centerStart,
+  child: Container(
+    decoration: BoxDecoration(
+      color: Colors.grey[300],
+      borderRadius: const BorderRadiusDirectional.only(
+        topStart: Radius.circular(10.0),
+        topEnd: Radius.circular(10.0),
+        bottomEnd: Radius.circular(10.0),
+      ),
+    ),
+    padding: const EdgeInsets.symmetric(
+      vertical: 5.0,
+      horizontal: 10.0,
+    ),
+    child: Text(
+      '${messageModel.text}',
+    ),
+  ),
+);
+
+Widget buildSenderMessage(MessageModel messageModel) => Align(
+  alignment: AlignmentDirectional.centerEnd,
+  child: Container(
+    decoration: const BoxDecoration(
+      color: defaultColor,
+      borderRadius: BorderRadiusDirectional.only(
+        topStart: Radius.circular(10.0),
+        topEnd: Radius.circular(10.0),
+        bottomStart: Radius.circular(10.0),
+      ),
+    ),
+    padding: const EdgeInsets.symmetric(
+      vertical: 5.0,
+      horizontal: 10.0,
+    ),
+    child: Text(
+      '${messageModel.text}',
+    ),
+  ),
+);
