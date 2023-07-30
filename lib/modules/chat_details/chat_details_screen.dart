@@ -100,7 +100,7 @@ class ChatDetailsScreen extends StatelessWidget
                               ),
                             ),
                             Container(
-                              height: 57.0,
+                              height: 60.0,
                               color: defaultColor,
                               child: MaterialButton(
                                 onPressed:()
