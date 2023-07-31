@@ -42,10 +42,10 @@ dependencies:
   toast: ^0.3.0
   hexcolor: ^3.0.1
   shared_preferences: ^2.0.15
-  firebase_core: ^2.10.0
-  firebase_auth: ^4.4.2
-  cloud_firestore: ^4.5.2
-  firebase_storage: ^11.2.3
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
+  cloud_firestore: ^4.8.4
+  firebase_storage: ^11.2.5
   image_picker: ^0.8.9
 
 dev_dependencies:

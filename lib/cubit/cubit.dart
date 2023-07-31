@@ -31,13 +31,16 @@ class SocialCubit extends Cubit<SocialStates> {
   void getUserData() {
     emit(SocialGetUserLoadingState());
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
-      if (kDebugMode) {
+      if (kDebugMode)
+      {
         print(value.data());
       }
       userModel = UserModel.fromJson(value.data()!);
       emit(SocialGetUserSuccessState());
-    }).catchError((error) {
-      if (kDebugMode) {
+    }).catchError((error)
+    {
+      if (kDebugMode)
+      {
         print(error.toString());
       }
       emit(SocialGetUserErrorState(error.toString()));
@@ -280,7 +283,7 @@ class SocialCubit extends Cubit<SocialStates> {
 
   void getPosts() {
     emit(SocialGetPostsLoadingState());
-    FirebaseFirestore.instance.collection('posts').get().then((value) {
+    FirebaseFirestore.instance.collection('posts').orderBy('dateTime').get().then((value) {
       for (var element in value.docs) {
         element.reference.collection('comments').get().then((value) {
           comments.add(value.docs.length);

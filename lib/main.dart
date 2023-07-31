@@ -11,7 +11,7 @@ import 'package:social_app/shared/network/local/cache_helper.dart';
 import 'package:social_app/shared/styles/themes.dart';
 import 'cubit/cubit.dart';
 
-Future <void> main() async
+void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -46,7 +46,8 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.startWidget, required this.isDark});
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
