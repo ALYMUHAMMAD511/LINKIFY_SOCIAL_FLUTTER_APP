@@ -642,15 +642,16 @@ class SocialCubit extends Cubit<SocialStates> {
     });
   }
 
-  void logout(context) {
-    FirebaseAuth.instance.signOut().then((value) {
-      navigateTo(context, LoginScreen());
-      emit(SocialUserLogoutSuccessState());
-    }).catchError((error) {
-      if (kDebugMode) {
-        print(error.toString());
+  dynamic logout(context) async {
+    await CacheHelper.removeData(
+      key: 'uId',
+    ).then((value)
+    {
+      if (value)
+      {
+        navigateAndFinish(context, LoginScreen());
+        SocialCubit.get(context).currentIndex = 0;
       }
-      emit(SocialUserLogoutErrorState());
     });
   }
 
