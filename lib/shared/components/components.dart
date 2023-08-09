@@ -294,7 +294,7 @@ Widget buildPostItem(PostModel model, context, index) => Card(
                                 width: 5.0,
                               ),
                               Text(
-                                'Comments',
+                                '${SocialCubit.get(context).comments.length}',
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                   color: SocialCubit.get(context).isDark ? Colors.white70 : Colors.black45,
                                 ),
