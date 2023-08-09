@@ -5,7 +5,8 @@ import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/cubit/states.dart';
 import 'package:social_app/shared/components/components.dart';
 
-class FeedsScreen extends StatelessWidget {
+class FeedsScreen extends StatelessWidget
+{
   const FeedsScreen({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +15,7 @@ class FeedsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: SocialCubit.get(context).posts.isNotEmpty && SocialCubit.get(context).userModel != null,
+          condition: SocialCubit.get(context).posts!.isNotEmpty && SocialCubit.get(context).userModel != null,
           builder: (context) => SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
@@ -53,14 +54,14 @@ class FeedsScreen extends StatelessWidget {
                       itemBuilder: (context, index) =>
                           buildPostItem(SocialCubit
                               .get(context)
-                              .posts[index], context, index),
+                              .posts![index], context, index),
                       separatorBuilder: (context, index) =>
                       const SizedBox(
                         height: 10.0,
                       ),
                       itemCount: SocialCubit
                           .get(context)
-                          .posts
+                          .posts!
                           .length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),

@@ -86,53 +86,9 @@ class SocialCreateCommentErrorState extends SocialStates
   SocialCreateCommentErrorState(this.error);
 }
 
-class SocialCommentImagePickedSuccessState extends SocialStates {}
-
-class SocialCommentImagePickedErrorState extends SocialStates {}
-
-class SocialUploadCommentImageSuccessState extends SocialStates {}
-
-class SocialUploadCommentImageErrorState extends SocialStates {}
-
 class SocialGetCommentsLoadingState extends SocialStates {}
 
 class SocialGetCommentsSuccessState extends SocialStates {}
-
-class SocialGetCommentsErrorState extends SocialStates
-{
-  final String error;
-  SocialGetCommentsErrorState(this.error);
-}
-
-class SocialAddToFavoritesLoadingState extends SocialStates {}
-
-class SocialAddToFavoritesSuccessState extends SocialStates {}
-
-class SocialAddToFavoritesErrorState extends SocialStates {}
-
-class SocialGetFavoritesLoadingState extends SocialStates {}
-
-class SocialGetFavoritesSuccessState extends SocialStates {}
-
-class SocialGetFavoritesErrorState extends SocialStates {}
-
-class SocialRemoveFromFavoritesLoadingState extends SocialStates {}
-
-class SocialRemoveFromFavoritesSuccessState extends SocialStates {}
-
-class SocialRemoveFromFavoritesErrorState extends SocialStates {}
-
-class SocialSavePostLoadingState extends SocialStates {}
-
-class SocialSavePostSuccessState extends SocialStates {}
-
-class SocialSavePostErrorState extends SocialStates {}
-
-class SocialGetSavedPostsLoadingState extends SocialStates {}
-
-class SocialGetSavedPostsSuccessState extends SocialStates {}
-
-class SocialGetSavedPostsErrorState extends SocialStates {}
 
 class SocialSendMessageSuccessState extends SocialStates {}
 
