@@ -246,6 +246,48 @@ class EditProfileScreen extends StatelessWidget
                         return null;
                       }
                   ),
+                  const SizedBox(
+                    height: 50.0,
+                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        height: 50.0,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: MaterialButton(
+                          color: Colors.red,
+                          onPressed: ()
+                          {
+                            SocialCubit.get(context).logout(context);
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:
+                            [
+                              Icon(
+                                IconBroken.Logout,
+                                color: Colors.white,
+                                size: 24.0,
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                'Logout',
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+
+                  ),
+                      ),
+                    ),
                 ],
               ),
             ),
