@@ -1,16 +1,2 @@
-# social_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![social slide 1](https://github.com/user-attachments/assets/9e09492a-9a59-4d9c-8698-ed9bea700814)
+![social slide 2](https://github.com/user-attachments/assets/1ed5c6a4-7a29-443f-ac37-d7ae4f69e8a9)
